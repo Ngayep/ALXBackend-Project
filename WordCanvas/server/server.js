@@ -4,6 +4,8 @@ const dotenv = require("dotenv");
 const cors = require("cors");
 const authRoutes = require("./routes/auth");
 const blogRoutes = require("./routes/blog");
+const errorHandler = require("./middleware/errorHandler");
+
 
 dotenv.config();
 
@@ -21,11 +23,18 @@ mongoose
 
 // Define routes
 app.get("/", (req, res) => {
-  res.send("Welcome to WordCanvas API");
+  res.json({
+    message: "Welcome to WordCanvas API",
+    documentation: "Provide a link to API documentation here if available",
+    });
 });
 
 app.use("/api/auth", authRoutes);
 app.use("/api/blogs", blogRoutes);
+
+// Error handling middleware
+app.use(errorHandler);
+
 
 // Start the server
 const PORT = process.env.PORT || 5000;
