@@ -4,12 +4,22 @@ const bcrypt = require("bcrypt");
 const BlogPost = require("./models/BlogPost");
 const User = require("./models/User");
 
-dotenv.config({ path: "../.env" }); // Ensure the .env file is correctly loaded
+//dotenv.config({ path: "../.env" }); // Ensure the .env file is correctly loaded
+
+// Use hardcoded MongoDB URI instead of .env
+const MONGO_URI = "mongodb://localhost:27017/wordcanvas";
+
+// Debugging: Verify that MONGO_URI is loaded
+//console.log("Loading .env file...");
+//dotenv.config({ path: "../.env" });
+//console.log("MONGO_URI from .env:", process.env.MONGO_URI);
+console.log("Using hardcoded MONGO_URI:", MONGO_URI);
+
 
 const populateDatabase = async () => {
   try {
     // Connect to MongoDB
-    await mongoose.connect(process.env.MONGO_URI);
+    await mongoose.connect(MONGO_URI);
     console.log("MongoDB connected");
 
     // Clear existing data (optional)
