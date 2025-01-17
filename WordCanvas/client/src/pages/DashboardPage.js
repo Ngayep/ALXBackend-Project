@@ -14,7 +14,7 @@ const DashboardPage = () => {
   const fetchPosts = async (page) => {
    try {
     // Fetch posts from the backend
-     const response = await fetch("/api/posts?page=${page}&limit=${postsPerPage}");
+     const response = await fetch(`/api/posts?page=${page}&limit=${postsPerPage}`);
      const data = await response.json();
      setPosts(data.posts); // Assume `data.posts` contains the posts for the current page
      setTotalPages(data.totalPages); // Assume `data.totalPages` is provided by the backend
@@ -52,7 +52,6 @@ const DashboardPage = () => {
         totalPages={totalPages}
         onPageChange={handlePageChange}
       />
-      <PostForm post={editingPost} onSubmit={handleCreateOrUpdate} />
     </div>
   );
 };
