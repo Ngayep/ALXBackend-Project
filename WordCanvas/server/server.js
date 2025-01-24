@@ -10,6 +10,7 @@ const errorHandler = require("./middleware/errorHandler");
 dotenv.config();
 
 const app = express();
+const path = require("path");
 
 // Middleware
 app.use(cors());
@@ -25,8 +26,18 @@ mongoose
 app.get("/", (req, res) => {
   res.json({
     message: "Welcome to WordCanvas API",
-    documentation: "Provide a link to API documentation here if available",
+    documentation: "/api/docs",
     });
+});
+
+//doc route
+app.get("/api/docs", (req, res) => {
+    res.sendFile(path.join(__dirname, "docs.html"));
+});
+
+// for undefined routes
+app.use((req, res) => {
+  res.status(404).json({ message: "Route not found" });
 });
 
 app.use("/api/auth", authRoutes);

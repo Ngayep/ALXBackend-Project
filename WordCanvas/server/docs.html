@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WordCanvas API Documentation</title>
+</head>
+<body>
+    <h1>WordCanvas API Documentation</h1>
+
+    <h2>Endpoints</h2>
+
+    <h3>Authentication</h3>
+    <ul>
+        <li>
+            <b>POST /api/auth/signup</b>
+            <p>Description: Register a new user.</p>
+            <p>Required Data:</p>
+            <ul>
+                <li><b>name</b>: String</li>
+                <li><b>email</b>: String</li>
+                <li><b>password</b>: String</li>
+            </ul>
+            <p>Success Response:</p>
+            <pre>{ "success": true, "data": { "id": "123", "name": "John Doe" } }</pre>
+            <p>Error Response:</p>
+            <pre>{ "success": false, "error": "Email already exists." }</pre>
+        </li>
+        <li>
+            <b>POST /api/auth/login</b>
+            <p>Description: Log in an existing user.</p>
+            <p>Required Data:</p>
+            <ul>
+                <li><b>email</b>: String</li>
+                <li><b>password</b>: String</li>
+            </ul>
+            <p>Success Response:</p>
+            <pre>{ "success": true, "data": { "token": "JWT-TOKEN", "user": { "id": "123", "name": "John Doe" } } }</pre>
+            <p>Error Response:</p>
+            <pre>{ "success": false, "error": "Invalid credentials." }</pre>
+        </li>
+    </ul>
+
+    <h3>Blog Management</h3>
+    <ul>
+        <li>
+            <b>GET /api/blogs</b>
+            <p>Description: Fetch all blog posts.</p>
+            <p>Optional Query Parameters:</p>
+            <ul>
+                <li><b>author</b>: Filter by author ID</li>
+            </ul>
+            <p>Success Response:</p>
+            <pre>{ "success": true, "data": [ { "id": "1", "title": "First Blog", "author": "John Doe" } ] }</pre>
+            <p>Error Response:</p>
+            <pre>{ "success": false, "error": "Server error." }</pre>
+        </li>
+        <li>
+            <b>POST /api/blogs</b>
+            <p>Description: Create a new blog post.</p>
+            <p>Required Data:</p>
+            <ul>
+                <li><b>title</b>: String</li>
+                <li><b>content</b>: String</li>
+                <li><b>author</b>: User ID (from JWT token)</li>
+            </ul>
+            <p>Success Response:</p>
+            <pre>{ "success": true, "data": { "id": "1", "title": "First Blog" } }</pre>
+            <p>Error Response:</p>
+            <pre>{ "success": false, "error": "Unauthorized access." }</pre>
+        </li>
+    </ul>
+
+    <h2>General Response Structure</h2>
+    <ul>
+        <li><b>success</b>: Boolean indicating if the request was successful.</li>
+        <li><b>data</b>: The requested data, if available.</li>
+        <li><b>error</b>: Error message, if any.</li>
+    </ul>
+</body>
+</html>
