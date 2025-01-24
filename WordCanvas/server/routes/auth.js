@@ -1,14 +1,28 @@
 const express = require("express");
-const router = express.Router();
-const User = require("../models/User");
-const { body, validationResult } = require("express-validator");
 const { signup, login } = require("../controllers/authController");
+const { body } = require("express-validator");
+
+//load environment variables
+require('dotenv').config();
 
 
 // Validate the presence of JWT_SECRET
-if (!process.env.JWT_SECRET) {
+const jwtSecret = process.env.JWT_SECRET;
+if (!jwtSecret) {
   throw new Error("JWT_SECRET is not defined in the environment variables.");
 }
+
+const router = express.Router();
+
+// Login Route
+router.post(
+  "/login",
+  [
+    body("email").isEmail().withMessage("Invalid email"),
+    body("password").notEmpty().withMessage("Password is required"),
+  ],
+  login
+);
 
 
 // Signup Route
@@ -22,14 +36,5 @@ router.post(
   signup
 );
 
-// Login Route
-router.post(
-  "/login",
-  [
-    body("email").isEmail().withMessage("Invalid email"),
-    body("password").notEmpty().withMessage("Password is required"),
-  ],
-  login
-);
 
 module.exports = router;

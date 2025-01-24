@@ -1,13 +1,15 @@
+require('dotenv').config(); // Load environment variables from .env file
+
+// Check if the environment variable is loaded correctly
+console.log("JWT_SECRET:", process.env.JWT_SECRET); // This should print your JWT secret or undefined if it's not loaded
+
 const express = require("express");
 const mongoose = require("mongoose");
-const dotenv = require("dotenv");
 const cors = require("cors");
 const authRoutes = require("./routes/auth");
 const blogRoutes = require("./routes/blog");
 const errorHandler = require("./middleware/errorHandler");
 
-
-dotenv.config();
 
 const app = express();
 const path = require("path");
