@@ -52,8 +52,8 @@ Installation
 
     Clone the repository:
 
-git clone https://github.com/yourusername/wordcanvas.git  
-cd wordcanvas  
+git clone https://github.com/Ngayep/ALXBackend-Project.git  
+cd WordCanvas  
 
 Install dependencies:
 
