@@ -6,6 +6,11 @@ const User = require("../models/User");
 
 // Signup controller
 const signup = async (req, res) => {
+   const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(400).json({ errors: errors.array() });
+  }
+	
   try {
     const { name, email, password } = req.body;
 
@@ -25,7 +30,7 @@ const signup = async (req, res) => {
     res.status(201).json({ message: "User created successfully" });
   } catch (error) {
     console.error("Error during signup:", error.message);
-    res.status(500).json({ message: "Error creating user", error });
+    res.status(500).json({ message: "An error occured during signup", error });
   }
 };
 
@@ -54,7 +59,7 @@ const login = async (req, res) => {
     res.status(200).json({ message: "Login successful", token });
   } catch (error) {
     console.error("Error during login:", error.message);
-    res.status(500).json({ message: "Error logging in", error });
+    res.status(500).json({ message: "an error occured during login", error });
   }
 };
 

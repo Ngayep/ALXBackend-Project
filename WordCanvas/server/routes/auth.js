@@ -21,7 +21,10 @@ router.post(
     body("email").isEmail().withMessage("Invalid email"),
     body("password").notEmpty().withMessage("Password is required"),
   ],
-  login
+  (req, res, next) => {
+    console.log("Login route hit"); // Log when login route is hit
+    login(req, res, next);
+  }
 );
 
 
@@ -33,7 +36,10 @@ router.post(
     body("email").isEmail().withMessage("Invalid email"),
     body("password").isLength({ min: 6 }).withMessage("Password must be at least 6 characters"),
   ],
-  signup
+  (req, res, next) => {
+    console.log("Signup route hit"); // Log when signup route is hit
+    signup(req, res, next);
+  }
 );
 
 
