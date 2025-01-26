@@ -1,4 +1,6 @@
 const express = require("express");
+const router = express.Router();
+
 const { signup, login } = require("../controllers/authController");
 const { body } = require("express-validator");
 
@@ -11,8 +13,6 @@ const jwtSecret = process.env.JWT_SECRET;
 if (!jwtSecret) {
   throw new Error("JWT_SECRET is not defined in the environment variables.");
 }
-
-const router = express.Router();
 
 // Login Route
 router.post(

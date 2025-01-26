@@ -18,6 +18,9 @@ const path = require("path");
 app.use(cors());
 app.use(express.json());
 
+app.use("/api/auth", authRoutes);
+app.use("/api/blogs", blogRoutes);
+
 // Connect to MongoDB
 mongoose
 	.connect(process.env.MONGO_URI)
@@ -42,8 +45,6 @@ app.use((req, res) => {
   res.status(404).json({ message: "Route not found" });
 });
 
-app.use("/api/auth", authRoutes);
-app.use("/api/blogs", blogRoutes);
 
 // Error handling middleware
 app.use(errorHandler);
