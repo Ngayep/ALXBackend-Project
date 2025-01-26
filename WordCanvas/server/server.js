@@ -1,7 +1,7 @@
 require('dotenv').config(); // Load environment variables from .env file
 
 // Check if the environment variable is loaded correctly
-console.log("JWT_SECRET:", process.env.JWT_SECRET); // This should print your JWT secret or undefined if it's not loaded
+console.log("JWT_SECRET:", process.env.JWT_SECRET);
 
 const express = require("express");
 const mongoose = require("mongoose");
@@ -27,11 +27,29 @@ mongoose
 	.then(() => console.log("MongoDB connected"))
   	.catch((err) => console.error("MongoDB connection error:", err));
 
-// Define routes
+// API Info
+const apiInfo = {
+  name: "WordCanvas API",
+  version: "1.0.0",
+  description: "An API for creating and managing user-generated blogs and content.",
+  documentation: "/api/docs",
+  routes: [
+    { method: "POST", path: "/api/auth/signup", description: "Create a new user account" },
+    { method: "POST", path: "/api/auth/login", description: "Login to your account" },
+    { method: "GET", path: "/api/blogs", description: "Retrieve all blogs" },
+    { method: "POST", path: "/api/blogs", description: "Create a new blog" },
+  ],
+};
+
+// Define routes beginning with base route
 app.get("/", (req, res) => {
   res.json({
-    message: "Welcome to WordCanvas API",
-    documentation: "/api/docs",
+    message: `Welcome to ${apiInfo.name}`,
+    version: apiInfo.version,
+    description: apiInfo.description,
+    documentation: apiInfo.documentation,
+    routes: apiInfo.routes,
+    status: "In Progress",
     });
 });
 
