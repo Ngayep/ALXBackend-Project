@@ -1,7 +1,7 @@
 require('dotenv').config(); // Load environment variables from .env file
 
 // Check if the environment variable is loaded correctly
-console.log("JWT_SECRET:", process.env.JWT_SECRET);
+//console.log("JWT_SECRET:", process.env.JWT_SECRET);
 
 const express = require("express");
 const mongoose = require("mongoose");
